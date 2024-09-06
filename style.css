@@ -1,0 +1,72 @@
+p{
+    margin: 0;
+    padding: 0;
+}
+
+.greeting{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #fff;
+    background-color: #00539f;
+    font-size: 40px;
+}
+
+.btn-book-visit{
+    display: none;
+}
+
+.modal-log-in{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 400px;
+    height: 200px;
+    position: relative;
+}
+
+.modal-make-visit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 600px;
+    height: auto;
+    position: relative;
+    padding: 20px;
+}
+
+.modal-wrapper, .modal-log-in-wrapper, .modal-edit-wrapper{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(155, 166, 164, 0.3);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+}
+
+.btn-close-modal, .btn-close-log-in{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.navbar-brand {
+    height: 60px;
+    width: 140px;
+}

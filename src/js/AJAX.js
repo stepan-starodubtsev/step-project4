@@ -9,7 +9,6 @@ const getToken = async (email, password) => {
         });
 
         const token = await response.text();
-
         localStorage.setItem('authToken', token);
 
         return token;
@@ -20,7 +19,7 @@ const getToken = async (email, password) => {
 
 
 
-const fetchAllCards = async () => {
+const fetchCards = async () => {
     const token = localStorage.getItem('authToken');
 
     if (!token) {
@@ -36,9 +35,9 @@ const fetchAllCards = async () => {
             }
         });
 
-        if (!response.ok) {
-            throw new Error('Помилка при отриманні карток');
-        }
+        // if (!response.ok) {
+        //     throw new Error('Помилка при отриманні карток');
+        // }
 
         const cards = await response.json();
         return cards;
@@ -48,30 +47,127 @@ const fetchAllCards = async () => {
 };
 
 
-
 const loadCards = async () => {
-    const token = localStorage.getItem('authToken');
+    const cards = await fetchCards();
+};
 
-    if (!token) {
-        console.error("Токен не знайдено. Спочатку виконайте вхід.");
-        return;
-    }
+
+
+window.addEventListener('load', loadCards);
+
+const displayCards = (cards) => {
+    const cardContainer = document.querySelector('#cardContainer');
+    cardContainer.innerHTML = '';
+
+    cards.forEach((card) => {
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('card');
+        cardElement.id = `card-${card.id}`;
+        cardElement.innerHTML = `
+            розмітка для картки
+        `;
+        cardContainer.appendChild(cardElement);
+    });
+};
+
+
+
+const editCard = (cardId) => {
+    const cardElement = document.getElementById(`card-${cardId}`);
+    const currentTitle = cardElement.querySelector('h3').textContent;
+    const currentDescription = cardElement.querySelector('p').textContent;
+
+    cardElement.innerHTML = `
+        форма для зміни картки
+    `;
+};
+
+
+
+const saveCard = async (cardId) => {
+    const token = localStorage.getItem('authToken');
+    const newTitle = document.getElementById(`editTitle-${cardId}`).value;
+    const newDescription = document.getElementById(`editDescription-${cardId}`).value;
 
     try {
-        const response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
+        const response = await fetch(`https://ajax.test-danit.com/api/v2/cards/${cardId}`, {
+            method: 'PUT',
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify({
+                title: newTitle,
+                description: newDescription
+            })
         });
 
-        if (!response.ok) {
-            throw new Error('Не вдалося завантажити картки');
-        }
+        // if (!response.ok) {
+        //     throw new Error('Помилка при збереженні картки');
+        // }
 
-        const cards = await response.json();
+        loadCards();
     } catch (error) {
         console.error("Помилка:", error);
     }
 };
 
-window.addEventListener('load', loadCards);
+
+
+const deleteCard = async (cardId) => {
+    const token = localStorage.getItem('authToken');
+
+    const confirmDelete = confirm("Ви впевнені, що хочете видалити цю картку?");
+    if (!confirmDelete) return;
+
+    try {
+        const response = await fetch(`https://ajax.test-danit.com/api/v2/cards/${cardId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        // if (!response.ok) {
+        //     throw new Error('Помилка при видаленні картки');
+        // }
+
+        document.getElementById(`card-${cardId}`).remove();
+    } catch (error) {
+        console.error("Помилка при видаленні картки:", error);
+    }
+};
+
+
+
+const updateCardInDOM = (cardId, updatedData) => {
+    const cardElement = document.getElementById(`card-${cardId}`);
+    cardElement.querySelector('h3').textContent = updatedData.title;
+    cardElement.querySelector('p').textContent = updatedData.description;
+};
+
+
+const saveCardAfterDlCrEd = async (cardId) => {
+    const token = localStorage.getItem('authToken');
+    const newTitle = document.getElementById(`editTitle-${cardId}`).value;
+    const newDescription = document.getElementById(`editDescription-${cardId}`).value;
+
+    try {
+        const response = await fetch(`https://ajax.test-danit.com/api/v2/cards/${cardId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                title: newTitle,
+                description: newDescription
+            })
+        });
+
+        const updatedCard = await response.json();
+        updateCardInDOM(cardId, updatedCard);
+    } catch (error) {
+        console.error("Помилка:", error);
+    }
+};

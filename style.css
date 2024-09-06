@@ -13,14 +13,6 @@ p{
     font-size: 40px;
 }
 
-/*.content{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    gap: 15px;*/
-/*    padding: 10px;*/
-/*    background-color: #e1dede;*/
-/*}*/
-
 .btn-book-visit{
     display: none;
 }
@@ -73,107 +65,6 @@ p{
     top: 0;
     right: 0;
 }
-
-/*.card{*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    width: 100%;*/
-/*    background-color: #ffc1074f;*/
-/*}*/
-
-/*.card-body{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    width: 100%;*/
-/*    justify-content: space-between;*/
-/*    gap: 20px;*/
-/*    height: 120px;*/
-/*    overflow: hidden;*/
-/*}*/
-
-/*.card-body-doctor, .card-body-info{*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*}*/
-
-/*.card-body-name{*/
-/*    font-size: 22px;*/
-/*}*/
-
-/*.card-body-edit-button img{*/
-/*    width: 30px;*/
-/*    height: 30px;*/
-/*}*/
-
-/*.content-empty{*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    font-size: 35px;*/
-/*    color: gray;*/
-/*}*/
-
-/*.card-title{*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    padding-right: 300px;*/
-/*    font-size: 22px;*/
-/*}*/
-
-/*.card-text{*/
-/*    font-size: 25px;*/
-/*    !*padding: 20px;*!*/
-/*}*/
-
-/*.card-btn-hide{*/
-/*    display: none*/
-/*    !* inline-block *!*/
-/*}*/
-
-/*.card-user-heart, .card-user-additional{*/
-/*    display: flex;*/
-/*    justify-content: space-around;*/
-/*}*/
-
-/*.filter-content {*/
-/*    display: none;*/
-/*    padding: 10px;*/
-/*    margin-top: 10px;*/
-/*    background-color: darksalmon;*/
-/*}*/
-
-/*.filter-text {*/
-/*    color: red;*/
-/*    font-weight: bold;*/
-/*    font-size: 30px;*/
-/*}*/
-
-/*.btn-primary {*/
-/*    --bs-btn-bg: #fdb813;*/
-/*    --bs-btn-hover-bg: #d99a04;*/
-/*    --bs-btn-border-color:#fdb813;*/
-/*    --bs-btn-active-bg: #d99a04;*/
-/*}*/
-
-/*.btn-secondary {*/
-/*    --bs-btn-bg: #dd9c00;*/
-/*    --bs-btn-hover-bg: #b4830d;*/
-/*    --bs-btn-active-bg: #b4830d;*/
-/*}*/
-
-/*.btn-outline-success {*/
-/*    --bs-btn-bg: #256dae;*/
-/*    --bs-btn-hover-bg: #134c7f;*/
-/*    --bs-btn-border-color:#00539f;*/
-/*    --bs-btn-color: white;*/
-/*    --bs-btn-active-bg: #134c7f;*/
-/*}*/
-
-/*.btn-outline-secondary{*/
-/*    --bs-btn-hover-bg: #00539f;*/
-/*    --bs-btn-active-bg: #134c7f;*/
-/*}*/
 
 .navbar-brand {
     height: 60px;

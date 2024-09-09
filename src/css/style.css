@@ -1,5 +1,30 @@
-.delete-visit{
-    min-height: 16px;
-    min-width: 16px;
-    background-image: url();
+.custom-select-outline {
+    border: 1px solid #0d6efd;
+    background-color: transparent;
+    color: #0d6efd;
+}
+
+.custom-select-outline:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.custom-select-outline option {
+    color: #000;
+}
+
+.input-outline {
+    border: 1px solid #0d6efd;
+    background-color: transparent;
+    color: #0d6efd;
+}
+
+.input-outline:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.input-outline::placeholder {
+    color: #0d6efd;
+    opacity: 0.7;
 }

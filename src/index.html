@@ -11,26 +11,34 @@
 <body>
 <main>
     <div class="container">
-
         <div class="d-flex justify-content-between my-3">
             <h1>Список прийомів</h1>
-            <div class="d-flex btn-group">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                             class="bi bi-funnel" viewBox="0 0 16 16">
-                            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
-                        </svg>
-                    </button>
-
-                    <button type="button" class="btn btn-outline-primary">
-                        Сортувати
+            <div class="d-flex w-50">
+                <div class="input-group">
+                    <input type="text" class="form-control input-outline" placeholder="Шукати по назві/вмісту" aria-label="Search bar"
+                           aria-describedby="searchbar">
+                    <button type="button" class="btn btn-outline-primary me-2" id="search-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-filter" viewBox="0 0 16 16">
-                            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                             class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
                         </svg>
                     </button>
                 </div>
+
+                <select class="form-select custom-select-outline" aria-label="Sort">
+                    <option selected>Сортувати по</option>
+                    <option value="urgencyHigh">Спочатку термінові</option>
+                    <option value="urgencyLow">Спочатку нетермінові</option>
+                    <option value="visitOpen">Спочатку не відвідані</option>
+                    <option value="visitDone">Спочатку відвідані</option>
+                </select>
+
+                <button type="button" class="btn btn-outline-primary ms-2" data-bs-toggle="modal" data-bs-target="#filter-modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                         class="bi bi-funnel" viewBox="0 0 16 16">
+                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -235,6 +243,35 @@
         </div>
     </div>
 </main>
+
+<div class="modal fade" id="filter-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Оберіть параметри фільтрування:</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="filterStatusSelect" class="form-label">Статус</label>
+                    <select class="form-select mb-3" id="filterStatusSelect" aria-label="Filter status select">
+                        <option value="open">Візит не пройдено</option>
+                        <option value="done">Візит пройдено</option>
+                    </select>
+                    <label for="filterUrgencySelect" class="form-label">Терміновість візиту</label>
+                    <select class="form-select mb-3" id="filterUrgencySelect" aria-label="Filter urgency select">
+                        <option value="high">Терміново</option>
+                        <option value="normal">Середня терміновість</option>
+                        <option value="low">Дуже терміново</option>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="filter-btn" class="btn btn-primary">Відфільтрувати</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>

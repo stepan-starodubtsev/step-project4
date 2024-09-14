@@ -1,11 +1,14 @@
+const token = "84f2cb04-74a4-465b-be4c-4b79953985af";
 class Card {
-    constructor(id, doctor, visitPurpose, bloodPressure, bmi, medicalHistory) {
+    constructor(id, doctor, visitPurpose, bloodPressure, bmi, medicalHistory, urgency, visitStatus) {
         this._id = id;
         this._doctor = doctor;
         this._visitPurpose = visitPurpose;
         this._bloodPressure = bloodPressure;
         this._bmi = bmi;
         this._medicalHistory = medicalHistory;
+        this._urgency = urgency;
+        this._visitStatus = visitStatus;
     }
 
     get id() {
@@ -32,6 +35,13 @@ class Card {
         return this._medicalHistory;
     }
 
+    get urgency() {
+        return this._urgency;
+    }
+
+    get visitStatus() {
+        return this._visitStatus;
+    }
 
     set doctor(value) {
         this._doctor = value;
@@ -52,6 +62,14 @@ class Card {
     set medicalHistory(value) {
         this._medicalHistory = value;
     }
+
+    set urgency(value) {
+        this._urgency = value;
+    }
+
+    set visitStatus(value) {
+        this._visitStatus = value;
+    }
 }
 
 class CardManager {
@@ -59,6 +77,7 @@ class CardManager {
         this.apiUrl = "https://ajax.test-danit.com/api/v2/cards";
         this.cards = [];
     }
+
 
     async fetchCards() {
         try {
@@ -79,13 +98,16 @@ class CardManager {
             }
 
             const cardData = await response.json();
+            console.log(cardData);
             this.cards = cardData.map(card => new Card(
                 card.id,
                 card.doctor || "Не вказано",
                 card.visitPurpose || "Не вказано",
                 card.bloodPressure || "Не вказано",
                 card.bmi || "Не вказано",
-                card.medicalHistory || "Не вказано"
+                card.medicalHistory || "Не вказано",
+                card.urgency || "Не вказано",
+                card.visitStatus || "Не вказано"
             ));
 
             return this.cards;
@@ -94,7 +116,7 @@ class CardManager {
         }
     }
 
-    async addCard(doctor, visitPurpose, bloodPressure, bmi, medicalHistory) {
+    async addCard(doctor, visitPurpose, bloodPressure, bmi, medicalHistory, urgency, visitStatus) {
         try {
             const response = await fetch(this.apiUrl, {
                 method: 'POST',
@@ -107,9 +129,12 @@ class CardManager {
                     visitPurpose,
                     bloodPressure,
                     bmi,
-                    medicalHistory
+                    medicalHistory,
+                    urgency,
+                    visitStatus
                 })
             });
+
 
             if (!response.ok) {
                 throw new Error('Помилка при додаванні картки');
@@ -122,7 +147,9 @@ class CardManager {
                 newCard.visitPurpose,
                 newCard.bloodPressure,
                 newCard.bmi,
-                newCard.medicalHistory
+                newCard.medicalHistory,
+                newCard.urgency,
+                newCard.visitStatus
             ));
         } catch (error) {
             console.error("Помилка при додаванні картки:", error);
@@ -175,10 +202,3 @@ class CardManager {
         }
     }
 }
-
-// const cardManager = new CardManager();
-// const useCardManager = async () => {
-//     await cardManager.fetchCards();
-// };
-
-// useCardManager();
